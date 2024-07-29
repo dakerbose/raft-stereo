@@ -18,19 +18,19 @@ RAFTStereo                                         [1, 1, 640, 960]          --
 │    │    └─Sequential: 3-8                        [1, 128, 160, 240]        443,264 同3-7
 │    └─Sequential: 2-8                             [1, 128, 80, 120]         --
 │    │    └─ResidualBlock: 3-9                     [1, 128, 80, 120]         312,448 = 和3-6一样的残差块295680 + 降采样层(128 * 128 * 1 * 1 + 偏置128) + 归一化层(偏置项128+缩放因子128)
-│    │    └─ResidualBlock: 3-10                    [1, 128, 80, 120]         295,680
+│    │    └─ResidualBlock: 3-10                    [1, 128, 80, 120]         295,680 同3-6
 │    └─ModuleList: 2-9                             --                        --
-│    │    └─Sequential: 3-11                       [1, 128, 80, 120]         443,264
-│    │    └─Sequential: 3-12                       [1, 128, 80, 120]         443,264
+│    │    └─Sequential: 3-11                       [1, 128, 80, 120]         443,264 同3-7
+│    │    └─Sequential: 3-12                       [1, 128, 80, 120]         443,264 同3-7
 │    └─Sequential: 2-10                            [1, 128, 40, 60]          --
-│    │    └─ResidualBlock: 3-13                    [1, 128, 40, 60]          312,448
-│    │    └─ResidualBlock: 3-14                    [1, 128, 40, 60]          295,680
+│    │    └─ResidualBlock: 3-13                    [1, 128, 40, 60]          312,448 同3-9
+│    │    └─ResidualBlock: 3-14                    [1, 128, 40, 60]          295,680 同3-6
 │    └─ModuleList: 2-11                            --                        --
-│    │    └─Conv2d: 3-15                           [1, 128, 40, 60]          147,584
-│    │    └─Conv2d: 3-16                           [1, 128, 40, 60]          147,584
+│    │    └─Conv2d: 3-15                           [1, 128, 40, 60]          147,584 输入通道数128 * 输出通道数128*9 + 偏置128
+│    │    └─Conv2d: 3-16                           [1, 128, 40, 60]          147,584 同3-15
 '''
-ModuleList用于不同分辨率输出，context_dims和hidden_dims都是[128, 128, 128]
-也就是说Sequential: 2-6里面有两层ResidualBlock，而ModuleList里面也有也有一层ResidualBlock
+ModuleList用于不同分辨率输出，context_dims和hidden_dims都是[128, 128, 128]，也就是说output_dim = [[128, 128, 128], [128, 128, 128]]
+也就是说Sequential: 2-6里面有两层ResidualBlock，而ModuleList里面也有也有一层ResidualBlock 
 '''
         output_list = []
         for dim in output_dim:
