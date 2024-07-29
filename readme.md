@@ -1,3 +1,4 @@
+'''
 RAFTStereo                                         [1, 1, 640, 960]          --
 ├─MultiBasicEncoder: 1-1                           [1, 128, 160, 240]        --
 │    └─Conv2d: 2-1                                 [1, 64, 640, 960]         9,472
@@ -27,7 +28,7 @@ RAFTStereo                                         [1, 1, 640, 960]          --
 │    └─ModuleList: 2-11                            --                        --
 │    │    └─Conv2d: 3-15                           [1, 128, 40, 60]          147,584
 │    │    └─Conv2d: 3-16                           [1, 128, 40, 60]          147,584
-
+'''
 ModuleList用于不同分辨率，context_dims和hidden_dims都是[128, 128, 128]
 也就是说Sequential: 2-6里面有两层ResidualBlock，而ModuleList里面也有也有一层ResidualBlock
 '''
